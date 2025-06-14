@@ -142,8 +142,8 @@ T_dop = 723  # K
 m = 0.42  # kg
 c = 461  # J/kgK
 deltaT = round(Q / (m * c), 2)
-T1 = round(deltaT + T_ok, 2)
-print(f"T_1: {T1} K <= T_dop = {T_dop} K", T1 <= T_dop)
+T_1 = round(deltaT + T_ok, 2)
+print(f"T_1: {T_1} K <= T_dop = {T_dop} K", T_1 <= T_dop)
 
 # Trajno ukljucivanje u radu
 R_sr = 64.28  # mm
