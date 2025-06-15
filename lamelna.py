@@ -173,7 +173,7 @@ print()
 # Poluga (E335)
 l1 = 50  # mm
 l2 = 17.5  # mm
-l = 40  # mm
+l = 42.5  # mm
 a = 8  # mm
 a0 = 4.50  # mm
 b = 15  # mm
