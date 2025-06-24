@@ -17,7 +17,7 @@ d_vr = 40
 t = 4.9
 
 # Provjera faktora sigurnosti
-b1 = 0.90
+b1 = 0.85
 b2 = 0.94
 K1 = 1.5
 beta_kt = 1.9
@@ -147,9 +147,9 @@ print(f"T_1: {T_1} K <= T_dop = {T_dop} K", T_1 <= T_dop)
 
 # Trajno ukljucivanje u radu
 R_sr = 64.28  # mm
-v_m = round(2 * pi * rps * R_sr / 1000, 2)
-alfa_k = round(18800 + 25100 * v_m**1.5, 2)
-print(f"alfa_k: {alfa_k}")
+v_m = round(2 * pi * rps * R_sr / 1000, 2)  # m/s
+alfa_k = round(18800 + 25100 * v_m**1.5, 2)  # J/m^2hK
+print(f"alfa_k: {alfa_k} J/m^2hK")
 As = 0.05675  # m^2
 T = round(Qz / (alfa_k * As) + T_ok, 2)
 print(f"T: {T} K <= T_dop = {T_dop} K", T <= T_dop)
@@ -182,8 +182,9 @@ Re = 320  # MPa
 E = 210000  # MPa
 P = 2  # mm (hod matice)
 fi = 15  # deg
+n_pol = 3
 
-F_uklj = round(F_un / 3, 2)  # N
+F_uklj = round(F_un / n_pol, 2)  # N
 print(f"F_uklj: {F_uklj} N")
 
 F = round(F_uklj * l2 / l1, 2)  # N
@@ -256,15 +257,12 @@ print(f"tau_a: {tau_a} N/mm^2 <= tau_a_dop = {tau_a_dop} N/mm^2", tau_a <= tau_a
 # Ručica
 alfa_nos = 40 * pi / 180  # rad
 mi_ruc = 0.1
-n_pol = 3
 
-F_A = round(F * (tan(alfa_nos) + mi_ruc), 2)
-F_A1 = round(n_pol * F_A * (tan(alfa_nos) + mi_ruc), 2)
+F_A = round(n_pol * F * (tan(alfa_nos) + mi_ruc) ** 2, 2)  # N
 print(f"F_A: {F_A} N")
-print(f"F_A:' {F_A1} N")
 
 R_ruc = 111  # mm (Ortlinghaus)
 F_ruc = 150  # N
-R = round(F_A1 * R_ruc / F_ruc, 2)
+R = round(R_ruc * (F_A - F_ruc) / F_ruc, 2)  # mm
 R_dop = 750  # mm
 print(f"R: {R} mm <= R_dop = {R_dop} mm", R <= R_dop)
